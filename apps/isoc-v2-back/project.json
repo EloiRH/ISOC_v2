@@ -1,0 +1,64 @@
+{
+  "name": "isoc-v2-back",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/isoc-v2-back/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/isoc-v2-back",
+        "main": "apps/isoc-v2-back/src/main.ts",
+        "tsConfig": "apps/isoc-v2-back/tsconfig.app.json",
+        "assets": ["apps/isoc-v2-back/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/isoc-v2-back/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "isoc-v2-back:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "isoc-v2-back:build:development"
+        },
+        "production": {
+          "buildTarget": "isoc-v2-back:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/isoc-v2-back/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/isoc-v2-back/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

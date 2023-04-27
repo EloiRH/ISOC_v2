@@ -1,0 +1,33 @@
+{
+  "name": "isoc-v2-front-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/isoc-v2-front-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/isoc-v2-front-e2e/cypress.config.ts",
+        "devServerTarget": "isoc-v2-front:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "isoc-v2-front:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "isoc-v2-front:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/isoc-v2-front-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["isoc-v2-front"]
+}
